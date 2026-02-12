@@ -1,0 +1,27 @@
+1. Overall Attrition Rate:
+SELECT 
+COUNTIF(Attrition) AS employees_left
+ FROM `steam-spider-475612-v0.HR_Analytics.HR` LIMIT 1000
+2. ATTRITION BY DEPARTMENT.
+SELECT
+    Department,
+    COUNT(*) AS total_employees,
+    COUNTIF(Attrition) AS employees_left,
+    ROUND(
+        SAFE_DIVIDE(COUNTIF(Attrition), COUNT(*)) * 100,
+        2
+    ) AS attrition_rate
+FROM `steam-spider-475612-v0.HR_Analytics.HR`
+GROUP BY Department
+ORDER BY attrition_rate DESC;
+3. ATTRITION BY OVERTIME:
+SELECT
+    OverTime,
+    COUNT(*) AS total_employees,
+    COUNTIF(Attrition) AS employees_left,
+    ROUND(
+        SAFE_DIVIDE(COUNTIF(Attrition), COUNT(*)) * 100,
+        2
+    ) AS attrition_rate
+FROM `steam-spider-475612-v0.HR_Analytics.HR`
+GROUP BY OverTime;
